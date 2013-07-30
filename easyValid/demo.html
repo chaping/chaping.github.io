@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>easyValid演示</title>
+<script src="jquery-1.8.3.min.js"></script>
+<script src="valid-2.0.js"></script>
+<style>
+body,p{ margin:0; padding:0; font-size:12px;}
+</style>
+</head>
+<body>
+<h2>仿58同城表单验证</h2>
+<style>
+.v58{ margin:100px; margin-top:0;}
+.v58 .label{ float:left; width:78px; line-height:30px; font-size:14px;}
+.v58 .input-text{ border:1px solid #c8c8c8; height:30px; line-height:30px; width:236px; padding:0 3px; vertical-align:top;}
+.v58 .ev-tip-dom{ display:inline-block; _display:inline; zoom:1; width:244px; position:relative; padding:5px 3px 5px 40px; line-height:18px;}
+.v58 .ev-tip-dom .info{ display:block; color:#666}
+.v58 .ev-tip-dom .bot{ position:absolute; height:3px; line-height:0; font-size:0; width:287px; left:0; bottom:-3px; background:url(images/58.gif) 0 -186px no-repeat;}
+.v58 .ev-tip{background:url(images/58.gif) no-repeat;}
+.v58 .ev-err{background:url(images/58.gif) 0 -190px no-repeat;}
+.v58 .ev-err .bot{ background-position:0 -376px;}
+.v58 .ev-ok{background:url(images/58.gif) 0 -385px; height:18px;}
+.v58 .ev-ok .bot{ display:none;}
+.v58 p{ margin-top:10px; height:50px;}
+</style>
+<div class="v58">
+	<form id="valid_58">
+    	<p>
+        	<span class="label">用  户  名：</span>
+        	<input type="text" class="input-text" name="username" datatype="w4~20" tipmsg="4-20位，可由字母、数字和下划线组成，注册成功后用户名不可修改" errmsg="用户名需为4-20个字符（包括数字、字母、下划线）" emptymsg="用户名不能为空" />
+            <span class="ev-tip-dom">
+            	<span class="info"></span>
+            	<s class="bot"></s>
+            </span>
+        </p>
+        <p>
+        	<span class="label">电子邮箱：</span>
+        	<input type="text" class="input-text" name="email" datatype="email" errmsg="邮箱格式不正确" emptymsg="电子邮箱不能为空" />
+            <span class="ev-tip-dom">
+            	<span class="info"></span>
+            	<s class="bot"></s>
+            </span>
+        </p>
+        <p>
+        	<span class="label">密　　码：</span>
+        	<input type="password" class="input-text" name="password" datatype="w6~20" tipmsg="6-20位，只能由字母、数字和下划线组成" emptymsg="密码不能为空" />
+            <span class="ev-tip-dom">
+            	<span class="info"></span>
+            	<s class="bot"></s>
+            </span>
+        </p>
+        <p>
+        	<span class="label">确认密码：</span>
+        	<input type="password" class="input-text" name="repassword" datatype="re:password" tipmsg="请确认你的密码" errmsg="两次输入的密码不一致！" />
+            <span class="ev-tip-dom">
+            	<span class="info"></span>
+            	<s class="bot"></s>
+            </span>
+        </p>
+        <p><span class="label">&nbsp;</span><input type="submit" value=" 提 交 " /></p>
+    </form>
+    <script>
+    $('#valid_58').easyValid({
+		textcls:'info'
+	});
+    </script>
+</div>
+
+
+<h2>仿新浪微博注册表单验证</h2>
+<style>
+.weibo .block{ position:relative; margin-bottom:10px;}
+.weibo .label{ float:left; width:160px; text-align:right; line-height:32px; padding-right:10px; font-size:14px; color:#333;}
+.weibo .formelem{ margin-left:165px;}
+.weibo .formelem .input-text{ height:30px; width:195px; border:1px solid #ccc; border-radius:2px; box-shadow:2px 2px 3px #eaeaea inset; outline:none 0;}
+.weibo .formelem .input-text.focus{ border-color:#ffb941;}
+.weibo .tipinfo{ position:absolute; top:6px; left:375px; line-height:18px; padding-left:20px;}
+.weibo .tipinfo s{ position:absolute; width:16px; height:16px; background:url(images/weibo.png); top:0; left:0;}
+.weibo .tipinfo.ok s{ background-position:0 0;}
+.weibo .tipinfo.err s{ background-position:0 -50px;}
+.weibo .tipinfo.tip s{ background-position:0 -200px}
+</style>
+<div class="weibo">
+	<form id="valid_weibo">
+	<div class="block">
+    	<div class="label">邮箱</div>
+        <div class="formelem">
+        	<input type="text" class="input-text" datatype="email" tipmsg="你输入的邮箱将作为微博登录名" errmsg="请输入正确的邮箱地址" emptymsg="" />
+        </div>
+        <div class="tipinfo"><s></s><span class="tiptext"></span></div>
+    </div>
+    <div class="block">
+    	<div class="label">设置密码</div>
+        <div class="formelem">
+        	<input type="password" class="input-text" datatype="/[\w\!\@\#\$\%\^\&]{6,16}/" tipmsg="请输入6-16为数字、字母或常用符号,字母区分大小写" errmsg="请输入6-16为数字、字母或常用符号" emptymsg="请输入密码" />
+        </div>
+        <div class="tipinfo"><s></s><span class="tiptext"></span></div>
+    </div>
+    <div class="block">
+    	<div class="label">昵称：</div>
+        <div class="formelem">
+        	<input type="text" class="input-text" datatype="/([\w\-]|[\u0391-\uFFE5]){4,24}/" tipmsg="请输入4-24位数字、字符,支持中文、英文、-、_" errmsg="请输入4-24位数字、字符,支持中文、英文、-、_" emptymsg="请输入昵称" />
+        </div>
+        <div class="tipinfo"><s></s><span class="tiptext"></span></div>
+    </div>
+    <div class="block">
+    	<div class="label">验证码：</div>
+        <div class="formelem">
+        	<input type="text" class="input-text" style="width:100px;" datatype="w4" tipmsg="请输入验证码" errmsg="验证码输入有误" emptymsg="请输入验证码" />&nbsp;&nbsp;验证码图片
+        </div>
+        <div class="tipinfo"><s></s><span class="tiptext"></span></div>
+    </div>
+    <div class="block">
+    	<div class="label"></div>
+        <div class="formelem">
+        	<input type="submit" class="submit-btn" value=" 注 册 "/>
+        </div>
+    </div>
+    </form>
+    <script>
+    $('#valid_weibo').easyValid({
+		domcls:'getTipDom()',
+		errcls:'err',
+		okcls:'ok',
+		tipcls:'tip',
+		f_tipcls:'focus',
+		textcls:'tiptext',
+		fn:{
+			getTipDom:function($elem,form){
+				return $elem.closest('div').next('.tipinfo');
+			}
+		}
+	});
+    </script>
+</div>
+
+
+<h2>仿京东商城企业用户注册表单验证</h2>
+<style>
+#valid_360buy .label{ float:left; width:160px; text-align:right; padding-right:10px; line-height:26px;}
+#valid_360buy .formelem{ margin-left:160px; height:55px;}
+#valid_360buy .input-text{ border:1px solid #bbb; width:240px; height:16px; padding:4px 3px; outline:none;}
+#valid_360buy .input-text.err{ color:#f00; border:1px solid #f00; outline:1px solid #ffc1c1;}
+#valid_360buy .input-text.focus{ border:1px solid #efa100; outline:2px solid #ffdc97;}
+#valid_360buy .formelem .tipinfo{ line-height:20px; margin-top:3px; padding-left:10px; color:#999; border:none 0;}
+#valid_360buy .formelem .tipinfo.err{ color:#f00}
+</style>
+<div>
+	<form id="valid_360buy">
+    	<div class="block">
+        	<div class="label">邮箱：</div>
+            <div class="formelem">
+            	<p><input type="text" class="input-text" datatype="email" tipmsg="请输入常用的邮箱，将用来找回密码、接收订单信息等" emptymsg="请输入邮箱" errmsg="请输入有效的邮箱地址" /></p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">请输入密码：</div>
+            <div class="formelem">
+            	<p><input type="password" name="password" class="input-text" datatype="w6~20" tipmsg="6-20位字符，可使用数字字母和符号的组合" emptymsg="请输入密码" errmsg="密码长度只能在6-20位之间" /></p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">请确认密码：</div>
+            <div class="formelem">
+            	<p><input type="text" class="input-text" datatype="re:password" tipmsg="请再次输入密码" emptymsg="请再次输入密码" errmsg="两次输入的密码不一致" /></p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">所在部门：</div>
+            <div class="formelem">
+            	<p>
+                	<select datatype="d" emptymsg="请选择联系人所在部门" errmsg="请选择联系人所在部门" tipmsg="">
+                    	<option value="">请选择</option>
+                        <option value="1">办公室</option>
+                        <option value="2">市场部</option>
+                        <option value="3">采购部</option>
+                	</select>
+                </p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">公司名称：</div>
+            <div class="formelem">
+            	<p><input type="text" class="input-text" datatype="*" tipmsg="请填写公司名称" emptymsg="请填写公司名称" errmsg="请填写公司名称" /></p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">公司所在地：</div>
+            <div class="formelem">
+            	<p>
+                	<select class="jd_area1" datatype="validArea()" emptymsg="请选择公司所在地" errmsg="请选择公司所在地" tipmsg="">
+                    	<option value="">请选择</option>
+                        <option value="1">上海</option>
+                	</select>
+                    <select class="jd_area2" datatype="validArea()" emptymsg="请选择公司所在地" errmsg="请选择公司所在地" tipmsg="">>
+                    	<option value="">请选择</option>
+                        <option value="1">上海</option>
+                    </select>
+                    <select class="jd_area3" datatype="validArea()" emptymsg="请选择公司所在地" errmsg="请选择公司所在地" tipmsg="">>
+                    	<option value="">请选择</option>
+                        <option value="1">上海</option>
+                    </select>
+                </p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">购买类型/用途：</div>
+            <div class="formelem">
+            	<p>
+                	<label><input type="checkbox" class="jd_type" value="1" datatype="validType()" errmsg="请选择够买类型/用途" tipmsg="" />IT设备</label>
+                    <label><input type="checkbox" class="jd_type" value="2" datatype="validType()" errmsg="请选择够买类型/用途" tipmsg="" />数码通讯</label>
+                    <label><input type="checkbox" class="jd_type" value="3" datatype="validType()" errmsg="请选择够买类型/用途" tipmsg="" />办公用品耗材</label>
+                </p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label">企业性质：</div>
+            <div class="formelem">
+            	<p>
+                	<label><input type="radio" class="jd_xingzhi" name="xingzhi" value="1" datatype="validXingzhi()" errmsg="请选择企业性质" tipmsg="" />国有</label>
+                    <label><input type="radio" class="jd_xingzhi" name="xingzhi" value="2" datatype="validXingzhi()" errmsg="请选择企业性质" tipmsg="" />民营</label>
+                    <label><input type="radio" class="jd_xingzhi" name="xingzhi" value="3" datatype="validXingzhi()" errmsg="请选择企业性质" tipmsg="" />外资</label>
+                </p>
+                <p class="tipinfo"></p>
+            </div>
+        </div>
+        <div class="block">
+        	<div class="label"></div>
+            <div class="formelem">
+            	<p><input type="submit" value=" 提 交 " /></p>
+            </div>
+        </div>
+    </form>
+    <script>
+    $('#valid_360buy').easyValid({					 
+		focus:false,						 
+		//domcls:'getTipDom()',
+		domcls:function($elem,form){
+				return $elem.closest('p').next('.tipinfo');
+			},
+		errcls:'err',
+		okcls:'ok',
+		tipcls:'tip',
+		f_tipcls:'focus',
+		f_errcls:'err',
+		onvalid:function(state,conf){
+			
+		},
+		fn:{
+			getTipDom:function($elem,form){
+				return $elem.closest('p').next('.tipinfo');
+			},
+			validArea:function(value,conf){
+				if( $('.jd_area1').val() && $('.jd_area2').val() && $('.jd_area3').val()){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			},
+			validType:function(value,conf){
+				if( $('.jd_type:checked').length>0 ){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			},
+			validXingzhi:function(value,conf){
+				if( $('.jd_xingzhi:checked').length>0 ){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			}
+		}
+	});
+    </script>
+</div>
+
+
+</body>
+</html>
