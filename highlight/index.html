@@ -76,7 +76,7 @@ function render(){
 	toHTML();
 }
 function toHTML(){
-	var html="<link rel='stylesheet' type='text/css' href='http://hcp8706.github.io/highlight/";
+	var html="<link rel='stylesheet' type='text/css' href='http://chaping.github.io/highlight/";
 	html=html+$("#css").attr("href");
 	html=html+"'/>";
 	html=html+$(".syntaxhighlighter").parent().html();
@@ -139,7 +139,7 @@ function echo (){
 			</select>
             <label class="checkbox"><input type="checkbox" id="gutter" checked="checked"/>显示行号</label>
 			<label class="checkbox"><input type="checkbox" id="to_html"/>生成HTML</label>
-			<button type="button" class="btn btn-primary" onclick="render();"><i class="icon-chevron-down icon-white"></i>语法着色</button><p>
+			<button type="button" class="btn btn-primary" onClick="render();"><i class="icon-chevron-down icon-white"></i>语法着色</button><p>
     		<label class="radio"><input type="radio" name="higilight_style" checked="checked" value="default"/>默认样式</label>
     		<label class="radio"><input type="radio" name="higilight_style" value="emacs"/>Emacs样式</label>
     		<label class="radio"><input type="radio" name="higilight_style" value="eclipse"/>Eclipse样式</label>
