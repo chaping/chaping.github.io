@@ -272,6 +272,7 @@
   color: red !important;
 }
 .syntaxhighlighter .toolbar {
+  display:none;	
   color: white !important;
   background: #6ce26c !important;
   border: none !important;

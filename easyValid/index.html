@@ -1,21 +1,69 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<script src="jquery-1.8.3.min.js"></script>
-<script src="valid.js"></script>
+<meta charset="utf-8" />
+<title>easyValid</title>
+<style>
+body,div,p,ul,li{ padding:0; margin:0}
+ul,li{ list-style:inside disc;}
+body{ background:#e7e7e7; font-family:"微软雅黑", "宋体"; font-size:14px;}
+.wraper{ width:900px; margin:0 auto;}
+#forkme{ position:absolute; top:0; right:0; width:149px; height:149px;}
+#header{ border-bottom:3px dotted #ccc; margin-bottom:20px;}
+h1{ text-align:center; font-size:50px; margin-bottom:25px; font-weight:normal;}
+h2{ text-align:center; font-size:20px; font-weight:normal;}
+.tit{ font-size:18px; font-weight:bold; padding:10px 0;}
+.code{ padding:0 10px; border:1px solid #999; border-radius:5px; background:#fff; margin:10px 0;}
+span.care{ color:#F30;}
+p.split{ height:10px; border-bottom:2px dotted #ccc;}
+</style>
 </head>
 <body>
-	<form id="theform">
-    	<p>用户名：<input type="text" name="username" datatype="*" ajaxurl="a.php" /></p>
-        <p>密　码：<input type="text" name="password" datatype="d5" /></p>
-        <p><input type="submit" value="提交" /></p>
-    </form>
-    <script>
-    $('#theform').easyValid({
-		
-	});
-    </script>
+<div class="wraper">
+	<div id="header">
+    	<h1>easyValidator</h1>
+        <h2>一个简单·强大的jquery表单验证插件</h2>
+    </div>
+    <div id="content">
+    	<div class="intro">
+            easyValidator是一个jquery表单验证插件，力求把复杂繁琐的表单验证工作简化,同时又具有较大的适用性和灵活性，能够应付千变万化的各种不同形式的表单验证。
+            <p class="tit">主要特征：</p>
+            <ul>
+                <li>可自定义验证的数据类型</li>
+                <li>可自定义验证的提示方式</li>
+                <li>支持ajax远程验证</li>
+                <li>直接在表单元素上以添加属性的方式进行配置，简单明了</li>
+                <li>兼容IE6+、chrome、firefox、opera等各大主流浏览器</li>
+            </ul>
+        </div>
+        <p class="tit">使用方法：</p>
+        首先要在页面引入jquery与easyValid
+        <div class="code">
+        	<link rel='stylesheet' type='text/css' href='http://chaping.github.io/highlight/css/shCoreDefault.css'/><div id="highlighter_836017" class="syntaxhighlighter nogutter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">&lt;script&nbsp;src=</code><code class="js string">"jquery-1.8.3.min.js"</code><code class="js plain">&gt;&lt;/script&gt;</code></div><div class="line number2 index1 alt1"><code class="js plain">&lt;script&nbsp;src=</code><code class="js string">"easyvalid-1.0.min.js"</code><code class="js plain">&gt;&lt;/script&gt;</code></div></div></td></tr></tbody></table></div>
+        </div>
+        然后在dom加载完毕后，或者在要验证的表单html代码后面调用easyValid函数
+        <div class="code">
+        	<div id="highlighter_223975" class="syntaxhighlighter nogutter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">&lt;script&gt;</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(form_selector).easyValid(opts);</code></div><div class="line number3 index2 alt2"><code class="js plain">&lt;/script&gt;</code></div></div></td></tr></tbody></table></div>
+        </div>
+        其中form_selector为要进行验证的表单的选择器，opts为本插件的配置对象。<br/>
+        例如，有一段表单的html代码:
+        <div class="code">
+        	<div id="highlighter_696437" class="syntaxhighlighter nogutter  xml"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">form</code>&nbsp;<code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"theform"</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">用户名:&nbsp;&lt;</code><code class="xml keyword">input</code>&nbsp;<code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text"</code>&nbsp;<code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"username"</code>&nbsp;<code class="xml color1">datatype</code><code class="xml plain">=</code><code class="xml string">"w6~12"</code>&nbsp;<code class="xml plain">/&gt;</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">密　码：&lt;</code><code class="xml keyword">input</code>&nbsp;<code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"password"</code>&nbsp;<code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"password"</code>&nbsp;<code class="xml color1">datatype</code><code class="xml plain">=</code><code class="xml string">"w6~20"</code>&nbsp;<code class="xml plain">/&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">邮　箱：&lt;</code><code class="xml keyword">input</code>&nbsp;<code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text"</code>&nbsp;<code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"email"</code>&nbsp;<code class="xml color1">datatype</code><code class="xml plain">=</code><code class="xml string">"email"</code>&nbsp;<code class="xml plain">/&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">input</code>&nbsp;<code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"submit"</code>&nbsp;<code class="xml color1">value</code><code class="xml plain">=</code><code class="xml string">"提交"</code>&nbsp;<code class="xml plain">/&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">form</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div>
+        </div>
+        然后我们对应的调用easyValid插件进行验证的代码就是：
+        <div class="code">
+        	<div id="highlighter_96357" class="syntaxhighlighter nogutter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">&lt;script&gt;</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">'#theform'</code><code class="js plain">).easyValid();</code></div><div class="line number3 index2 alt2"><code class="js plain">&lt;/script&gt;</code></div></div></td></tr></tbody></table></div>
+        </div>
+        如上所示，我们甚至不需要给easyValid函数传入任何配置参数，此时使用的都是插件默认的参数。<br />
+        <span class="care">easyValidator还可以以属性的方式直接在各个表单元素的html标签上进行参数的配置，属性名就是参数名，属性值就是参数值。easyValid()函数中传入的参数配置对象是一个总体的、所有表单元素共用的参数配置，而各表单元素html标签上的参数则是该表单元素单独使用的参数，并且会覆盖easyValid()函数中传入的相同的参数。注意，在各表单元素html标签上能使用的参数与easyValid()函数中能传入的参数并不完全一致，具体请参考。</span><br/>
+        我们看到上面的html代码中每个表单元素都有一个datatype属性，该属性代表的是此表单元素可以接受的数据类型，easyValidator插件只会对拥有datatype属性的表单元素进行验证。<br/>
+        <p class="split"></p>
+        下面通过一些例子来介绍easyValidator的具体使用方法：        
+        <p class="tit">使用不同的验证类型</p>
+        
+    </div>
+    <div id="footer"></div>
+</div>
+<a id="forkme" href="https://github.com/chaping/easyValid" target="_blank"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
 </body>
 </html>
