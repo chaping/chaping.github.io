@@ -54,13 +54,308 @@ p.split{ height:10px; border-bottom:2px dotted #ccc;}
         <div class="code">
         	<div id="highlighter_96357" class="syntaxhighlighter nogutter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">&lt;script&gt;</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">'#theform'</code><code class="js plain">).easyValid();</code></div><div class="line number3 index2 alt2"><code class="js plain">&lt;/script&gt;</code></div></div></td></tr></tbody></table></div>
         </div>
-        如上所示，我们甚至不需要给easyValid函数传入任何配置参数，此时使用的都是插件默认的参数。<br />
-        <span class="care">easyValidator还可以以属性的方式直接在各个表单元素的html标签上进行参数的配置，属性名就是参数名，属性值就是参数值。easyValid()函数中传入的参数配置对象是一个总体的、所有表单元素共用的参数配置，而各表单元素html标签上的参数则是该表单元素单独使用的参数，并且会覆盖easyValid()函数中传入的相同的参数。注意，在各表单元素html标签上能使用的参数与easyValid()函数中能传入的参数并不完全一致，具体请参考。</span><br/>
-        我们看到上面的html代码中每个表单元素都有一个datatype属性，该属性代表的是此表单元素可以接受的数据类型，easyValidator插件只会对拥有datatype属性的表单元素进行验证。<br/>
-        <p class="split"></p>
-        下面通过一些例子来介绍easyValidator的具体使用方法：        
-        <p class="tit">使用不同的验证类型</p>
-        
+        如上所示，我们甚至不需要给easyValid函数传入任何配置参数，插件就能正常工作，此时使用的都是插件默认的配置。<br />
+        <p class="tit">配置参数：</p>
+        配置参数既可以html属性的方式写在html标签上，也可以js对象直接量的的方式传入easyValid函数。比如：
+        <div class="code">
+        	<link rel='stylesheet' type='text/css' href='http://chaping.github.io/highlight/css/shCoreDefault.css'/><div id="highlighter_60783" class="syntaxhighlighter nogutter  xml"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">form</code>&nbsp;<code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"theform"</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">input</code>&nbsp;<code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text"</code>&nbsp;<code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"email"</code>&nbsp;<code class="xml color1">errmsg</code><code class="xml plain">=</code><code class="xml string">"填写错误"</code>&nbsp;<code class="xml plain">/&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">form</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">script</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">$('#theform').easyValid({</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">errmsg:'填写错误'</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;</code><code class="xml plain">});</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">script</code><code class="xml plain">&gt; </code></div></div></td></tr></tbody></table></div>
+        </div>
+        如果同一个参数在两种方式中都进行了配置，例如上面的例子，则以在html标签中的为准。<br />
+        在html标签中配置的参数主要是单独针对该html标签代表的表单元素的，而在easyValid函数中传入的配置参数则会被所有表单元素共用。<br />
+        下面是对所有参数的一个说明：<br />
+        <table class="mytable" style="width: 98%;" border="1">
+            <tbody>
+            <tr><th width="160">属性</th><th width="110">类型</th><th width="80">默认值</th><th>说明</th></tr>
+            <tr><th><a>datatype</a></th>
+            <td>String|Function</td>
+            <td>无默认值</td>
+            <td>
+            验证类型。表单元素的值必须符合该验证类型才能通过验证。<br/>
+            ----------------------------------------------------<br/>
+            <i>系统提供了一些内置的常用验证类型，如下：</i><br/>
+            <div>
+                <b>*</b> : 不为空格的任何字符<br/>
+                <b>w</b> : 字母、数字和下划线<br/>
+                <b>d</b> : 数字(不包括小数)	<br/>
+               <b>en</b> : 英文字母，大小写都包括<br/>
+               <b>zh</b> : 中文字符<br/> 
+               <i>以上几种验证类型还可以自定义长度，例如:</i><br/>
+               <b>d5</b>:代表必须是5个数字<br/>
+               <b>d5~10</b>:代表5至10个数字<br/>
+               <b>d5~</b>:代表至少5个数字<br/>
+               <b>zh4</b>:代表必须是4个中文字符<br/>
+               <i>上面介绍的几种类型都可以这样用</i><br/>
+               <i>此外，还有几种固定的验证类型，如下：</i><br/>
+               <b>cellphone</b> : 手机号码<br/>
+               <b>telphone</b> : 固定电话<br/>
+               <b>email</b> : 电子邮箱<br/>
+               <b>idcard</b> : 身份证号码<br/>
+            </div>
+            ----------------------------------------------------<br/>
+            <i>如果以上无法满足你的需求，还可以直接写正则表达式</i><br/>
+            <div>
+                <xmp>例如：<input type="text" datatype="/^\d{5}$/"  /></xmp>
+                看到了吧，开头和结尾的这两个 "/" 斜杠符号即表明你使用的是自定义的正则表达式，这很好理解，我们创建正则表达式直接量的时候也是这种形式
+            </div>
+            ----------------------------------------------------<br/>
+            <i>如果自定义的正则表达式还是不能满足你的需要，那还可以使用自定义函数来验证</i><br/>
+            <div>
+                <xmp>例如：<input type="text" datatype="notNull()"  /></xmp>
+                这里我们使用的自定义验证函数是notNull,同时看到后面有一对括号，这就表明使用的是自定义的函数验证<br/>
+                自定义验证函数必须放在插件的自定义函数集合里，如果在这个集合里没有找到该函数，则任何值都会通过验证。<br/>
+                系统会给自定义验证函数传入两个参数，第一个是当前验证的表单的元素的值，第二个是当前验证的表单的元素的配置对象<br/>
+                自定义验证函数必须返回相应的代码，来表明验证的情况:<br/>
+                返回数字0或者不返回任何值表示验证通过；返回null时表示可以为空；返回数字1表示验证未通过；
+            </div>
+            ----------------------------------------------------<br/>
+            <i>此外，还有几种特殊的验证类型</i>
+            <div>
+                <b>re:name</b> : 一致性验证,使用时name替换成具体的name值,表示值必须与当前表单中name属性为name的元素的值相同，才能通过验证，用于两次输入密码的一致性验证<br/>
+            </div>
+            </td>
+            </tr>
+            
+            <tr><th><a>tiptype</a></th>
+            <td>Number|Function</td>
+            <td>2</td>
+            <td>
+            表单验证的提示类型<br/>
+             ----------------------------------------------------<br/>   
+            <div>
+                <i>程序内置了两种方式,是以数字来表示的</i><br/>
+                <b>1</b> : 最简单的alert弹出提示<br/>
+                <b>2</b> : 灵活、可自定义样式的提示,也是本插件默认的类型。当使用这种提示类型时，程序会在当前验证表单元素的同级元素中查找class名为该表单元素配置对象中domcls属性的值的元素，如果找不到这样的元素，则程序会在表单元素后面自动创建一个span元素，类名为配置对象中domcls属性的值。这个元素即是进行提示的UI元素，我们可以通过css来自定义它的展现形式。<br/>
+             ----------------------------------------------------<br/>   
+                <i>此外还可以使用自定义的函数来决定你想要的提示方式，达到随心所欲的灵活度</i><br/>
+                <xmp>比如: <input type="text" datatype="email" tiptype="emailUI()" /></xmp>
+                像datatype使用自定义函数时一样，要以一对小括号来标示，表明使用的是自定义函数，同时该函数必须存在于插件配置对象中的fn属性所定义的插件自定义函数集合中。<br/>
+                我们在定义这个自定义提示函数时可以使用三个参数：第一个为当前验证的状态码;第二个为当前验证的表单元素;第三个为该表单元素的配置对象。我们可以根据这些参数来创造出你想要的任何一种提示UI<br/>
+                
+            </div>	
+            </td>
+            </tr>
+            
+            <tr><th><a>domcls</a></th>
+            <td>String|Function</td>
+            <td>ev-tip-dom</td>
+            <td>
+            当tiptype为2时此参数才有用，用来指定提示元素的类名，程序会根据此类名在表单元素的的同级元素中进行查找，如果找不到，则会在表单元素后面以该属性的值为类名创建一个元素<br/>
+            ----------------------------------------------------<br/>  
+            <i>如果你的提示元素的位置很特殊，不是在表单元素的同级元素中，那么该值同样可以使用自定义函数</i><br/>
+            <xmp>例如: <input type="text" domcls="getTipDom()" /></xmp>
+            使用自定义函数时，要以一对小括号来标示，表明使用的是自定义函数，同时该函数必须存在于插件配置对象中的fn属性所定义的插件自定义函数集合中。<br/>
+            我们在定义这个自定义函数时可以使用两个参数：第一个是当前的表单元素(为jquery对象);第二个是该表单元素所在的form元素<br/>
+            该函数必须返回一个元素，作为进行提示的UI元素，同时程序会自动给这个元素加上domcls属性指定的类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>errcls</a></th>
+            <td>String</td>
+            <td>ev-err</td>
+            <td>
+            验证未通过时提示元素的类名，即验证未通过时程序会自动给提示元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>emptycls</a></th>
+            <td>String</td>
+            <td>同errcls的值</td>
+            <td>
+            值为空时提示元素的类名，即当前验证的表单元素值为空时程序会自动给提示元素加上这个类名，如果未特别指定该值，则与errcls相同。
+            </td>
+            </tr>
+            
+            <tr><th><a>okcls</a></th>
+            <td>String</td>
+            <td>ev-ok</td>
+            <td>
+            验证通过时提示元素的类名，即验证通过后程序会自动给提示元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>tipcls</a></th>
+            <td>String</td>
+            <td>ev-tip</td>
+            <td>
+            表单元素获得焦点时提示元素的类名，即当表单元素获得焦点时程序会自动给提示元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>waitcls</a></th>
+            <td>String</td>
+            <td>ev-wait</td>
+            <td>
+            当正在进行ajax验证时提示元素的类名，即在发送ajax验证请求并等待返回结果的这段时间，程序会自动给提示元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>f_errcls</a></th>
+            <td>String</td>
+            <td>evf-err</td>
+            <td>
+            验证未通过时表单元素的类名，即验证未通过时程序会自动给当前验证的表单元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>f_emptycls</a></th>
+            <td>String</td>
+            <td>同f_errcls的值</td>
+            <td>
+            
+            值为空时表单元素的类名，即当前验证的表单元素值为空时程序会自动给这个表单元素加上这个类名，如果未特别指定该值，则与f_errcls相同。
+            </td>
+            </tr>
+            
+            <tr><th><a>f_okcls</a></th>
+            <td>String</td>
+            <td>evf-ok</td>
+            <td>
+            验证通过时表单元素的类名，即验证通过后程序会自动给当前验证的表单元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>f_tipcls</a></th>
+            <td>String</td>
+            <td>evf-tip</td>
+            <td>
+            表单元素获得焦点时表单元素的类名，即当表单元素获得焦点时程序会自动给这个表单元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>f_waitcls</a></th>
+            <td>String</td>
+            <td>evf-wait</td>
+            <td>
+            当正在进行ajax验证时表单元素的类名，即在发送ajax验证请求并等待返回结果的这段时间，程序会自动给当前验证的表单元素加上这个类名。
+            </td>
+            </tr>
+            
+            <tr><th><a>errmsg</a></th>
+            <td>String</td>
+            <td>填写错误</td>
+            <td>
+            验证未通过时的提示信息
+            </td>
+            </tr>
+            
+            <tr><th><a>okmsg</a></th>
+            <td>String</td>
+            <td>空</td>
+            <td>
+            验证通过时的提示信息
+            </td>
+            </tr>
+            
+            <tr><th><a>tipmsg</a></th>
+            <td>String</td>
+            <td>请填写</td>
+            <td>
+            表单元素获得焦点时的提示信息
+            </td>
+            </tr>
+            
+            <tr><th><a>waitmsg</a></th>
+            <td>String</td>
+            <td>正在验证...</td>
+            <td>
+            进行ajax验证时的提示信息
+            </td>
+            </tr>
+            
+            <tr><th><a>emptymsg</a></th>
+            <td>String</td>
+            <td>不能为空</td>
+            <td>
+            不能为空时的提示信息
+            </td>
+            </tr>
+            
+            <tr><th><a>textcls</a></th>
+            <td>String</td>
+            <td>无默认值</td>
+            <td>
+            显示提示信息的容器的类名，为空时则直接显示在提示元素里面，如果设置了该属性，则会在提示元素里查找类名为该属性的元素作为存放提示信息的容器，该属性是考虑到有些提示元素可能有多层的结构
+            </td>
+            </tr>
+            
+            <tr><th><a>empty</a></th>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+            是否允许为空，如果为true则表示允许为空，当允许为空后，空值也可以通过验证，并且不会进行提示
+            </td>
+            </tr>
+            
+            <tr><th><a>ajaxurl</a></th>
+            <td>String</td>
+            <td>空</td>
+            <td>
+            ajax验证地址。如果指定了该属性的值，则插件会向这个值表示的地址发送一个ajax请求，同时当前验证表单元素的值也会以ajaxname属性指定的参数名随之发送。后台的ajax验证程序必须返回一个json对象，该对象有两个属性:errno和errstr.
+            errno为验证结果的标识码，只有errno的值为0时才代表通过验证，其他值都表示未通过验证,errstr为错误信息
+            </td>
+            </tr>
+            
+            <tr><th><a>ajaxname</a></th>
+            <td>String</td>
+            <td>ajaxdata</td>
+            <td>
+            进行ajax验证时发送数据的参数名，如果为空则插件会把当前验证的表单元素的name值作为该参数名，如果name值也为空，则会使用默认值ajaxdata
+            </td>
+            </tr>
+            
+            <tr><th><a>onvalid</a></th>
+            <td>Function</td>
+            <td>function(){}</td>
+            <td>
+            进行表单元素的验证后触发的回调函数，该函数可以使用三个参数,第一个为当前验证的表单元素,第二个为验证的结果代码,第三个为当前验证表单元素的配置对象
+            </td>
+            </tr>
+            
+            
+            </tbody>
+         </table> 
+         <p style="height:20px;"></p>
+         下面还有几个与插件行为有关的参数，他们只可以在easyValid函数中进行配置
+         <table class="mytable" style="width: 98%;" border="1">
+            <tbody>
+            <tr><th width="160">属性</th><th width="100">类型</th><th width="80">默认值</th><th>说明</th></tr>
+            <tr><th><a>all</a></th>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+            表单提交时是否验证所有表单元素,如果为false，则遇到未通过验证的就会停止后面元素的验证
+            </td>
+            </tr>
+            
+            <tr><th><a>focus</a></th>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+            如果为true，则提交表单时未通过验证的第一个表单元素自动获得焦点
+            </td>
+            </tr>
+            
+            <tr><th><a>fn</a></th>
+            <td>Object</td>
+            <td>{}</td>
+            <td>
+            存放插件所要使用的自定义函数的集合，有些属性需要用到函数时则那些函数都必须放在这个里面<br/>
+            例如:<pre> 
+            $('#foo').easyValid({
+                fn:{
+                        fn1:function(){...},
+                        fn2:function(){...},
+                        fn3:function(){...},
+                        fn4:function(){...}
+                        ...
+                    }
+            });
+            </pre>
+            </td>
+            </tr>
+            
+            </tbody>
+       </table>       
     </div>
     <div id="footer"></div>
 </div>
