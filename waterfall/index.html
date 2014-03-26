@@ -198,15 +198,11 @@ img{ border:0}
 <script>
 var opt={
   getResource:function(index,render){//index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
-	  if(index>=7) index=index%7+1;
 	  var html='';
-	  for(var i=20*(index-1);i<20*(index-1)+20;i++){
-		 var k='';
-		 for(var ii=0;ii<3-i.toString().length;ii++){
-	        k+='0';
-		 }
-		 k+=i;
-	     var src="images/p_"+k+".jpg";
+	  for(var i=0; i<20; i++){
+		 var k = i;
+		 k = '0' + (String(k).length==1?'0':'') + k;
+	  	 var src="images/p_"+k+".jpg";
 		 html+='<div class="cell"><img src="'+src+'" /><p>'+k+'</p></div>';
 	  }
 	  return $(html);
