@@ -167,7 +167,7 @@
 			"file": "js/game2.js",
 			"settings":
 			{
-				"buffer_size": 5740,
+				"buffer_size": 7840,
 				"line_ending": "Windows"
 			}
 		},
@@ -316,15 +316,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5740,
+						"buffer_size": 7840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4126,
-								4126
+								0,
+								65
 							]
 						],
 						"settings":
@@ -333,7 +333,7 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1920.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -351,8 +351,8 @@
 						"selection":
 						[
 							[
-								208,
-								208
+								238,
+								0
 							]
 						],
 						"settings":
