@@ -13,7 +13,7 @@ game.States.boot = function(){
 
 game.States.preload = function(){
 	this.preload = function(){
-		var preloadSprite = game.add.sprite(50,game.height/2,'loading'); //创建显示loading进度的sprite
+		var preloadSprite = game.add.sprite(35,game.height/2,'loading'); //创建显示loading进度的sprite
 		game.load.setPreloadSprite(preloadSprite);
 		//以下为要加载的资源
 		game.load.image('background','assets/background.png'); //背景
@@ -194,7 +194,7 @@ game.States.play = function(){
 	}
 
 	this.checkScore = function(pipe){//负责分数的检测和更新
-		if(!pipe.hasScored && pipe.y<=0 && pipe.x<=game.width/2-17-54){
+		if(!pipe.hasScored && pipe.y<=0 && pipe.x<=this.bird.x-17-54){
 			pipe.hasScored = true;
 			this.scoreText.text = ++this.score;
 			this.soundScore.play();
