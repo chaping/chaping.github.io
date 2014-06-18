@@ -6,17 +6,7 @@ game.States.boot = function(){
 		if(!game.device.desktop){
 			this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 			this.scale.forcePortrait = true;
-			//this.scale.refresh();
-			this.scale.enterIncorrectOrientation.add(function(){
-				//this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-				//this.scale.refresh();
-				this.setShowAll();
-			},this);
-			this.scale.leaveIncorrectOrientation.add(function(){
-				//this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-				//this.scale.refresh();
-				this.setExactFit();
-			},this);
+			this.scale.refresh();
 		}
 		game.load.image('loading','assets/preloader.gif');
 	};
