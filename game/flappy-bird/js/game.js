@@ -1,13 +1,13 @@
 var game = new Phaser.Game(320,505,Phaser.AUTO,'game'); //实例化game
-
 game.States = {}; //存放state对象
 
 game.States.boot = function(){
 	this.preload = function(){
+		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+		this.scale.refresh();
 		game.load.image('loading','assets/preloader.gif');
 	};
 	this.create = function(){
-		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 		game.state.start('preload'); //跳转到资源加载页面
 	};
 }
