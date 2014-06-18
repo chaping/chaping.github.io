@@ -4,17 +4,19 @@ game.States = {}; //存放state对象
 game.States.boot = function(){
 	this.preload = function(){
 		if(!game.device.desktop){
-			this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+			//this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 			this.scale.forcePortrait = true;
-			this.scale.refresh();
+			//this.scale.refresh();
+			this.setExactFit();
 			this.scale.enterIncorrectOrientation.add(function(){
-				alert(111);
-				this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-				this.scale.refresh();
+				//this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+				//this.scale.refresh();
+				this.setShowAll();
 			},this);
 			this.scale.leaveIncorrectOrientation.add(function(){
-				this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-				this.scale.refresh();
+				//this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+				//this.scale.refresh();
+				this.setExactFit();
 			},this);
 		}
 		game.load.image('loading','assets/preloader.gif');
