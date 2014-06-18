@@ -4,6 +4,7 @@ game.States = {}; //存放state对象
 game.States.boot = function(){
 	this.preload = function(){
 		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+		this.scale.forcePortrait = true;
 		this.scale.refresh();
 		game.load.image('loading','assets/preloader.gif');
 	};
