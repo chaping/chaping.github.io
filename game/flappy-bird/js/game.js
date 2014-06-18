@@ -8,6 +8,7 @@ game.States.boot = function(){
 			this.scale.forcePortrait = true;
 			this.scale.refresh();
 			this.scale.enterIncorrectOrientation.add(function(){
+				alert(111);
 				this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 				this.scale.refresh();
 			},this);
