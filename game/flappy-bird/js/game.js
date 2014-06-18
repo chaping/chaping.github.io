@@ -4,14 +4,8 @@ game.States = {}; //存放state对象
 game.States.boot = function(){
 	this.preload = function(){
 		if(!game.device.desktop){
-			this.scale.enterPortrait.add(function(){
-				this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-				this.scale.refresh();
-			},this);
-			this.scale.enterLandscape.add(function(){
-				this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-				this.scale.refresh();
-			},this);
+			this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+			this.scale.refresh();
 		}
 		game.load.image('loading','assets/preloader.gif');
 	};
