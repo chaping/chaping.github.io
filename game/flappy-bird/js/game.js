@@ -7,7 +7,7 @@ game.States.boot = function(){
 		game.load.image('loading','assets/preloader.gif');
 	};
 	this.create = function(){
-		game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 		game.state.start('preload'); //跳转到资源加载页面
 	};
 }
