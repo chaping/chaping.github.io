@@ -96,6 +96,7 @@ game.States.play = function(){
 		if(!this.hasStarted) return; //游戏未开始
 		game.physics.arcade.collide(this.bird,this.ground, this.hitGround, null, this); //与地面碰撞
 		game.physics.arcade.overlap(this.bird, this.pipeGroup, this.hitPipe, null, this); //与管道碰撞
+		if(!this.bird.inWorld) this.hitCeil(); //出了边界
 		if(this.bird.angle < 90) this.bird.angle += 2.5; //下降时头朝下
 		this.pipeGroup.forEachExists(this.checkScore,this); //分数检测和更新
 	}
@@ -130,6 +131,11 @@ game.States.play = function(){
 		this.bird.body.velocity.y = -350;
 		game.add.tween(this.bird).to({angle:-30}, 100, null, true, 0, 0, false); //上升时头朝上
 		this.soundFly.play();
+	}
+
+	this.hitCeil = function(){//撞了天花板
+		this.soundHitPipe.play();
+		this.gameOver();
 	}
 
 	this.hitPipe = function(){
