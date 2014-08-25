@@ -80,7 +80,7 @@
 			callback && callback(imgsrc); //callback传入的参数为预览图片的url
 		};
 		preloader.load( file.getSource() );*/
-		var fr = mOxie.FileReader();
+		var fr = new mOxie.FileReader();
 		var imgsrc = fr.readAsDataURL(file);
 		callback(imgsrc);
 	}
