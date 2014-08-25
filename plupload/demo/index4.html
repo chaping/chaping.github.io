@@ -81,8 +81,11 @@
 		};
 		preloader.load( file.getSource() );*/
 		var fr = new mOxie.FileReader();
+		fr.onload = function(e){
+			console.log(e);
+		}
 		fr.readAsDataURL(file);
-		console.log(fr);
+		//console.log(fr);
 	}
 
 	
